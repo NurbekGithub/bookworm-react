@@ -14,6 +14,14 @@ export const userLoggedIn = (user) => {
   }
 }
 
+export const confirm = (token) => dispatch => {
+  return api.user.confirm(token)
+    .then(user => {
+      localStorage.bookwormJWT = user.token;
+      dispatch(userLoggedIn(user))
+    })
+}
+
 export const logout = () => dispatch => {
   localStorage.removeItem('bookwormJWT');
   dispatch(userLoggedOut());
