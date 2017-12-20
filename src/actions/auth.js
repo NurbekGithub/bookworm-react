@@ -33,3 +33,15 @@ export const login = credentials => dispatch => {
     dispatch(userLoggedIn(user))
   });
 }
+
+export const resetPasswordRequest = ({ email }) => () => {
+  return api.user.resetPasswordRequest(email);
+}
+
+export const validateToken = token => () => {
+  return api.user.validateToken(token);
+}
+
+export const resetPassword = data => () => {
+  return api.user.resetPassword(data);
+}
