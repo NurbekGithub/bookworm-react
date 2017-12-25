@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import 'semantic-ui-css/semantic.min.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import setAuthorizationHeader from './utils/setAuthorizationHeader';
 
 import rootReducer from './rootReducer';
 import { userLoggedIn } from './actions/auth';
@@ -25,6 +26,7 @@ if(localStorage.bookwormJWT) {
     email: payload.email, confirmed: 
     payload.confirmed 
   };
+  setAuthorizationHeader(localStorage.bookwormJWT);
   store.dispatch(userLoggedIn(user));
 }
 

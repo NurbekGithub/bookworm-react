@@ -1,5 +1,6 @@
 import api from '../api';
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from './actionTypes';
+import setAuthorizationHeader from '../utils/setAuthorizationHeader';
 
 export const userLoggedOut = () => {
   return {
@@ -24,12 +25,14 @@ export const confirm = (token) => dispatch => {
 
 export const logout = () => dispatch => {
   localStorage.removeItem('bookwormJWT');
+  setAuthorizationHeader();
   dispatch(userLoggedOut());
 }
 
 export const login = credentials => dispatch => {
   return api.user.login(credentials).then(user => {
     localStorage.bookwormJWT = user.token;
+    setAuthorizationHeader(user.token);
     dispatch(userLoggedIn(user))
   });
 }
