@@ -3,13 +3,19 @@ import { Segment } from 'semantic-ui-react';
 
 import SearchBookForm from '../forms/SearchBookForm';
 import BookForm from '../forms/BookForm';
+import { fetchPages } from '../../actions/books';
 
 class NewBookPage extends Component {
   state = {
     book: null
   }
 
-  onBookSelect = book => this.setState({ book });
+  onBookSelect = book => {
+    this.setState({ book });
+    fetchPages(book.goodreadsId)
+      .then(res => res.data.pages)
+      .then(pages => this.setState({ book: {...book, pages} }))
+  }
 
   addBook = book => {console.log('Hi', book); return book}
 

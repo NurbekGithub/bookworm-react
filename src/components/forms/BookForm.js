@@ -115,10 +115,11 @@ class BookForm extends Component {
                 <Form.Field error={!!errors.pages} >
                   <label htmlFor='pages'>Book pages</label>
                   <input 
-                    type='number'
+                    disabled={data.pages === undefined}
+                    type='text'
                     id='pages'
                     name='pages'
-                    value={data.pages}
+                    value={data.pages !== undefined ? data.pages : '...Loading'}
                     onChange={this.onChangeNumber}
                   />
                   { errors.pages && <InlineMessage text={errors.pages} />}
@@ -148,8 +149,8 @@ BookForm.propTypes = {
     goodreadsId: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     authors: PropTypes.string.isRequired,
-    cover: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    pages: PropTypes.number.isRequired
+    covers: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    pages: PropTypes.number
   }).isRequired
 }
 

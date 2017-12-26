@@ -17,6 +17,8 @@ export default {
   },
   book: {
     searchBook: query =>
-      axios.get(`/api/books/search?q=${query}`)
+      axios.get(`/api/books/search?q=${query}`),
+    fetchPages: id => 
+      axios.get(`/api/books/fetchPages?goodreadsId=${id}`)
   }
 }
